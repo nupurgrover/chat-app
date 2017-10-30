@@ -1,0 +1,372 @@
+input CreateMessage {
+  message: String!
+}
+
+input CreateMessageInput {
+  message: String!
+  clientMutationId: String!
+}
+
+type CreateMessagePayload {
+  viewer: Viewer!
+  clientMutationId: String!
+  message: Message
+  edge: MessageEdge
+}
+
+input CreateUser {
+  name: String
+}
+
+# If authentication was successful the payload contains the user and a token. If unsuccessful this payload is null.
+type CreateUserPayload {
+  user: User
+  clientMutationId: String
+  viewer: Viewer!
+}
+
+input DeleteMessageInput {
+  id: ID!
+  clientMutationId: String!
+}
+
+type DeleteMessagePayload {
+  viewer: Viewer!
+  clientMutationId: String!
+  message: Message
+  edge: MessageEdge
+  deletedId: ID
+}
+
+input DeleteUserInput {
+  id: ID!
+  clientMutationId: String!
+}
+
+type DeleteUserPayload {
+  viewer: Viewer!
+  clientMutationId: String!
+  user: User
+  edge: UserEdge
+  deletedId: ID
+}
+
+# HelloPayload
+type HelloPayload {
+  message: String!
+}
+
+type Message implements Node {
+  id: ID!
+  message: String!
+}
+
+# A connection to a list of items.
+type MessageConnection {
+  # Information to aid in pagination.
+  pageInfo: PageInfo!
+  # A list of edges.
+  edges: [MessageEdge]
+  # Count of filtered result set without considering pagination arguments
+  count: Int!
+}
+
+# An edge in a connection.
+type MessageEdge {
+  # The item at the end of the edge.
+  node: Message!
+  # A cursor for use in pagination.
+  cursor: String!
+}
+
+input MessageFilter {
+  # Logical AND on all given filters.
+  AND: [MessageFilter!]
+  # Logical OR on all given filters.
+  OR: [MessageFilter!]
+  id: ID
+  # All values that are not equal to given value.
+  id_not: ID
+  # All values that are contained in given list.
+  id_in: [ID!]
+  # All values that are not contained in given list.
+  id_not_in: [ID!]
+  # All values less than the given value.
+  id_lt: ID
+  # All values less than or equal the given value.
+  id_lte: ID
+  # All values greater than the given value.
+  id_gt: ID
+  # All values greater than or equal the given value.
+  id_gte: ID
+  # All values containing the given string.
+  id_contains: ID
+  # All values not containing the given string.
+  id_not_contains: ID
+  # All values starting with the given string.
+  id_starts_with: ID
+  # All values not starting with the given string.
+  id_not_starts_with: ID
+  # All values ending with the given string.
+  id_ends_with: ID
+  # All values not ending with the given string.
+  id_not_ends_with: ID
+  message: String
+  # All values that are not equal to given value.
+  message_not: String
+  # All values that are contained in given list.
+  message_in: [String!]
+  # All values that are not contained in given list.
+  message_not_in: [String!]
+  # All values less than the given value.
+  message_lt: String
+  # All values less than or equal the given value.
+  message_lte: String
+  # All values greater than the given value.
+  message_gt: String
+  # All values greater than or equal the given value.
+  message_gte: String
+  # All values containing the given string.
+  message_contains: String
+  # All values not containing the given string.
+  message_not_contains: String
+  # All values starting with the given string.
+  message_starts_with: String
+  # All values not starting with the given string.
+  message_not_starts_with: String
+  # All values ending with the given string.
+  message_ends_with: String
+  # All values not ending with the given string.
+  message_not_ends_with: String
+}
+
+enum MessageOrderBy {
+  id_ASC
+  id_DESC
+  message_ASC
+  message_DESC
+}
+
+type Mutation {
+  createMessage(input: CreateMessageInput!): CreateMessagePayload
+  updateMessage(input: UpdateMessageInput!): UpdateMessagePayload
+  updateUser(input: UpdateUserInput!): UpdateUserPayload
+  updateOrCreateMessage(input: UpdateOrCreateMessageInput!): UpdateOrCreateMessagePayload
+  updateOrCreateUser(input: UpdateOrCreateUserInput!): UpdateOrCreateUserPayload
+  deleteMessage(input: DeleteMessageInput!): DeleteMessagePayload
+  deleteUser(input: DeleteUserInput!): DeleteUserPayload
+  createUser(input: SignupUserInput!): CreateUserPayload!
+}
+
+# An object with an ID
+interface Node {
+  # The id of the object.
+  id: ID!
+}
+
+# Information about pagination in a connection.
+type PageInfo {
+  # When paginating forwards, are there more items?
+  hasNextPage: Boolean!
+  # When paginating backwards, are there more items?
+  hasPreviousPage: Boolean!
+  # When paginating backwards, the cursor to continue.
+  startCursor: String
+  # When paginating forwards, the cursor to continue.
+  endCursor: String
+}
+
+type Query {
+  viewer: Viewer!
+  # Fetches an object given its ID
+  node(
+    # The ID of an object
+    id: ID!
+  ): Node
+}
+
+input SignupUserInput {
+  name: String
+  clientMutationId: String!
+}
+
+input UpdateMessage {
+  id: ID!
+  message: String
+}
+
+input UpdateMessageInput {
+  id: ID!
+  message: String
+  clientMutationId: String!
+}
+
+type UpdateMessagePayload {
+  viewer: Viewer!
+  clientMutationId: String!
+  message: Message
+  edge: MessageEdge
+}
+
+input UpdateOrCreateMessageInput {
+  update: UpdateMessage!
+  create: CreateMessage!
+  clientMutationId: String!
+}
+
+type UpdateOrCreateMessagePayload {
+  viewer: Viewer!
+  clientMutationId: String!
+  message: Message
+  edge: MessageEdge
+}
+
+input UpdateOrCreateUserInput {
+  update: UpdateUser!
+  create: CreateUser!
+  clientMutationId: String!
+}
+
+type UpdateOrCreateUserPayload {
+  viewer: Viewer!
+  clientMutationId: String!
+  user: User
+  edge: UserEdge
+}
+
+input UpdateUser {
+  id: ID!
+  name: String
+}
+
+input UpdateUserInput {
+  id: ID!
+  name: String
+  clientMutationId: String!
+}
+
+type UpdateUserPayload {
+  viewer: Viewer!
+  clientMutationId: String!
+  user: User
+  edge: UserEdge
+}
+
+type User implements Node {
+  id: ID!
+  name: String
+}
+
+# A connection to a list of items.
+type UserConnection {
+  # Information to aid in pagination.
+  pageInfo: PageInfo!
+  # A list of edges.
+  edges: [UserEdge]
+  # Count of filtered result set without considering pagination arguments
+  count: Int!
+}
+
+# An edge in a connection.
+type UserEdge {
+  # The item at the end of the edge.
+  node: User!
+  # A cursor for use in pagination.
+  cursor: String!
+}
+
+input UserFilter {
+  # Logical AND on all given filters.
+  AND: [UserFilter!]
+  # Logical OR on all given filters.
+  OR: [UserFilter!]
+  id: ID
+  # All values that are not equal to given value.
+  id_not: ID
+  # All values that are contained in given list.
+  id_in: [ID!]
+  # All values that are not contained in given list.
+  id_not_in: [ID!]
+  # All values less than the given value.
+  id_lt: ID
+  # All values less than or equal the given value.
+  id_lte: ID
+  # All values greater than the given value.
+  id_gt: ID
+  # All values greater than or equal the given value.
+  id_gte: ID
+  # All values containing the given string.
+  id_contains: ID
+  # All values not containing the given string.
+  id_not_contains: ID
+  # All values starting with the given string.
+  id_starts_with: ID
+  # All values not starting with the given string.
+  id_not_starts_with: ID
+  # All values ending with the given string.
+  id_ends_with: ID
+  # All values not ending with the given string.
+  id_not_ends_with: ID
+  name: String
+  # All values that are not equal to given value.
+  name_not: String
+  # All values that are contained in given list.
+  name_in: [String!]
+  # All values that are not contained in given list.
+  name_not_in: [String!]
+  # All values less than the given value.
+  name_lt: String
+  # All values less than or equal the given value.
+  name_lte: String
+  # All values greater than the given value.
+  name_gt: String
+  # All values greater than or equal the given value.
+  name_gte: String
+  # All values containing the given string.
+  name_contains: String
+  # All values not containing the given string.
+  name_not_contains: String
+  # All values starting with the given string.
+  name_starts_with: String
+  # All values not starting with the given string.
+  name_not_starts_with: String
+  # All values ending with the given string.
+  name_ends_with: String
+  # All values not ending with the given string.
+  name_not_ends_with: String
+}
+
+enum UserOrderBy {
+  id_ASC
+  id_DESC
+  name_ASC
+  name_DESC
+}
+
+# This is the famous Relay viewer object
+type Viewer {
+  allMessages(
+    filter: MessageFilter
+    orderBy: MessageOrderBy
+    skip: Int
+    after: String
+    before: String
+    first: Int
+    last: Int
+  ): MessageConnection!
+  allUsers(
+    filter: UserFilter
+    orderBy: UserOrderBy
+    skip: Int
+    after: String
+    before: String
+    first: Int
+    last: Int
+  ): UserConnection!
+  user: User
+  Message(id: ID): Message
+  User(id: ID): User
+  # hello
+  hello(name: String): HelloPayload
+  id: ID!
+}
