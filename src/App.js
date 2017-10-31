@@ -13,10 +13,19 @@ const AppAllMessageQuery = graphql`
   }
 `;
 
+const AppTextInputQuery = graphql`
+  query AppTextInputQuery {
+    viewer {
+      id
+    }
+  }
+`;
+
 class App extends Component {
   render() {
     return (
       <div>
+        Hello
         <QueryRenderer
           environment={environment}
           query={AppAllMessageQuery}
@@ -29,7 +38,18 @@ class App extends Component {
             return <div>Loading</div>;
           }}
         />
-        <TextInput />
+        <QueryRenderer
+          environment={environment}
+          query={AppTextInputQuery}
+          render={({ error, props }) => {
+            if (error) {
+              return <div>{error.message}</div>;
+            } else if (props) {
+              return <TextInput viewer={props.viewer} />;
+            }
+            return <div>Fetching Viewer</div>;
+          }}
+        />
       </div>
     );
   }
