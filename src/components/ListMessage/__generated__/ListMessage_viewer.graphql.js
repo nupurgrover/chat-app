@@ -36,6 +36,11 @@ const fragment /*: ConcreteFragment*/ = {
   "name": "ListMessage_viewer",
   "selections": [
     {
+      "kind": "FragmentSpread",
+      "name": "Message_viewer",
+      "args": null
+    },
+    {
       "kind": "LinkedField",
       "alias": "allMessages",
       "args": null,
