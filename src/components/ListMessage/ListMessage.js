@@ -6,7 +6,6 @@ class ListMessage extends React.Component {
   handleDelete = () => {};
 
   render() {
-    console.log(this.props.viewer.allMessages.edges);
     return (
       <div>{this.props.viewer.allMessages.edges.map(({ node }) => <Message key={node.__id} message={node} />)}</div>
     );

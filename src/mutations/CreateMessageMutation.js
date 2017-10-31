@@ -15,7 +15,7 @@ const mutation = graphql`
   }
 `;
 
-export default (message, viewerId) => {
+export default (message, viewerId, callback) => {
   const variables = {
     input: {
       message,
@@ -38,7 +38,6 @@ export default (message, viewerId) => {
 
       const viewerProxy = proxyStore.get(viewerId);
       const connection = ConnectionHandler.getConnection(viewerProxy, 'ListMessage_allMessages');
-      console.log('optimisticUpdater Connection', connection);
 
       if (connection) {
         ConnectionHandler.insertEdgeAfter(connection, newEdge);
@@ -50,7 +49,6 @@ export default (message, viewerId) => {
 
       const viewerProxy = proxyStore.get(viewerId);
       const connection = ConnectionHandler.getConnection(viewerProxy, 'ListMessage_allMessages');
-      console.log('updater Connection', connection);
 
       if (connection) {
         const newEdge = ConnectionHandler.createEdge(proxyStore, connection, newMessage, 'MessageEdge');
@@ -58,7 +56,7 @@ export default (message, viewerId) => {
       }
     },
     onCompleted: (response, errors) => {
-      console.log('completed', response, errors);
+      callback();
     },
     onError: err => console.error(err),
   });
