@@ -24,8 +24,8 @@ const AppTextInputQuery = graphql`
 class App extends Component {
   render() {
     return (
-      <div>
-        Hello
+      <div className="App-container">
+        <div className="app-header" />
         <QueryRenderer
           environment={environment}
           query={AppAllMessageQuery}
