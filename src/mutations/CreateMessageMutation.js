@@ -10,6 +10,7 @@ const mutation = graphql`
       message {
         id
         message
+        createdAt
       }
     }
   }
@@ -27,10 +28,12 @@ export default (message, viewerId, callback) => {
     mutation,
     variables,
     optimisticUpdater: proxyStore => {
+      const createdAt = new Date().toISOString();
       const id = 'client:newMessage' + tempId++;
       const newMessage = proxyStore.create(id, 'Message');
       newMessage.setValue(id, 'id');
       newMessage.setValue(message, 'message');
+      //newMessage.setValue(createdAt, 'createdAt');
 
       const newEdge = proxyStore.create('client:newEdge:' + tempId++, 'MessageEdge');
       newEdge.setLinkedRecord(newMessage, 'node');

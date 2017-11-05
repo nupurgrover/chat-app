@@ -25,6 +25,8 @@ type CreateUserPayload {
   viewer: Viewer!
 }
 
+scalar DateTime
+
 input DeleteMessageInput {
   id: ID!
   clientMutationId: String!
@@ -57,8 +59,10 @@ type HelloPayload {
 }
 
 type Message implements Node {
+  createdAt: DateTime!
   id: ID!
   message: String!
+  updatedAt: DateTime!
 }
 
 # A connection to a list of items.
@@ -84,6 +88,21 @@ input MessageFilter {
   AND: [MessageFilter!]
   # Logical OR on all given filters.
   OR: [MessageFilter!]
+  createdAt: DateTime
+  # All values that are not equal to given value.
+  createdAt_not: DateTime
+  # All values that are contained in given list.
+  createdAt_in: [DateTime!]
+  # All values that are not contained in given list.
+  createdAt_not_in: [DateTime!]
+  # All values less than the given value.
+  createdAt_lt: DateTime
+  # All values less than or equal the given value.
+  createdAt_lte: DateTime
+  # All values greater than the given value.
+  createdAt_gt: DateTime
+  # All values greater than or equal the given value.
+  createdAt_gte: DateTime
   id: ID
   # All values that are not equal to given value.
   id_not: ID
@@ -138,13 +157,32 @@ input MessageFilter {
   message_ends_with: String
   # All values not ending with the given string.
   message_not_ends_with: String
+  updatedAt: DateTime
+  # All values that are not equal to given value.
+  updatedAt_not: DateTime
+  # All values that are contained in given list.
+  updatedAt_in: [DateTime!]
+  # All values that are not contained in given list.
+  updatedAt_not_in: [DateTime!]
+  # All values less than the given value.
+  updatedAt_lt: DateTime
+  # All values less than or equal the given value.
+  updatedAt_lte: DateTime
+  # All values greater than the given value.
+  updatedAt_gt: DateTime
+  # All values greater than or equal the given value.
+  updatedAt_gte: DateTime
 }
 
 enum MessageOrderBy {
+  createdAt_ASC
+  createdAt_DESC
   id_ASC
   id_DESC
   message_ASC
   message_DESC
+  updatedAt_ASC
+  updatedAt_DESC
 }
 
 type Mutation {

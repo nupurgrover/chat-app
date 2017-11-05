@@ -52,6 +52,7 @@ class Message extends React.Component {
             <button onClick={this.handleEdit}>Post</button>
           </div>
         )}
+        <span>{this.props.message.createdAt}</span>
       </div>
     );
   }
@@ -67,6 +68,7 @@ export default createFragmentContainer(
     fragment Message_message on Message {
       id
       message
+      createdAt
     }
   `
 );

@@ -11,6 +11,7 @@ import type {ConcreteFragment} from 'relay-runtime';
 export type Message_message = {|
   +id: string;
   +message: string;
+  +createdAt: any;
 |};
 */
 
@@ -33,6 +34,13 @@ const fragment /*: ConcreteFragment*/ = {
       "alias": null,
       "args": null,
       "name": "message",
+      "storageKey": null
+    },
+    {
+      "kind": "ScalarField",
+      "alias": null,
+      "args": null,
+      "name": "createdAt",
       "storageKey": null
     }
   ],
