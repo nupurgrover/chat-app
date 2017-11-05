@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { createFragmentContainer, graphql } from 'react-relay';
+import moment from 'moment';
 import DeleteMessageMutation from '../../mutations/DeleteMessageMutation';
 import UpdateMessageMutation from '../../mutations/UpdateMessageMutation';
-
 import './Message.css';
 
 class Message extends React.Component {
@@ -37,22 +37,26 @@ class Message extends React.Component {
 
   render() {
     return (
-      <div className="message-container">
-        {!this.state.isEditMode ? (
-          <div className="message">
-            <p className="message-content"> {this.state.text}&nbsp;</p>
-            <div className="message-actions">
-              <i className="fa fa-trash message-icon" onClick={this.handleDelete} />
-              <i className="fa fa-pencil message-icon" onClick={() => this.switchToEditMode(true)} />
+      <div>
+        <div className="message-container">
+          {!this.state.isEditMode ? (
+            <div className="message">
+              <p className="message-content"> {this.state.text}&nbsp;</p>
+              <div className="message-actions">
+                <i className="fa fa-trash message-icon" onClick={this.handleDelete} />
+                <i className="fa fa-pencil message-icon" onClick={() => this.switchToEditMode(true)} />
+              </div>
             </div>
-          </div>
-        ) : (
-          <div>
-            <input value={this.state.text} onChange={this.changeText} />
-            <button onClick={this.handleEdit}>Post</button>
-          </div>
-        )}
-        <span>{this.props.message.createdAt}</span>
+          ) : (
+            <div>
+              <input value={this.state.text} onChange={this.changeText} />
+              <button onClick={this.handleEdit}>Post</button>
+            </div>
+          )}
+        </div>
+        <div className="timestamp">
+          <span>{moment(this.props.message.createdAt).format('DD/MM/YYYY, h:mm')}</span>
+        </div>
       </div>
     );
   }
