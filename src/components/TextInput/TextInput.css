@@ -1,0 +1,7 @@
+.text-input-container {
+  display: flex;
+  margin: auto;
+  flex-direction: column;
+  width: 300px;
+  height: 40px;
+}

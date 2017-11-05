@@ -1,5 +1,35 @@
-.message {
+.message-container {
   width: 300px;
-  height: 100px;
-  margin: auto;
+  height: 40px;
+  margin: 0 auto 10px;
+  background-color: #e0dada;
+  text-align: center;
+  display: flex;
+  flex-direction: row;
+  flex-basis: auto;
+}
+
+.message {
+  display: flex;
+  flex: 1;
+  flex-direction: row;
+}
+
+.message-content {
+  flex: 1;
+}
+
+.message-actions {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.message-icon {
+  position: relative;
+  top: 15px;
+}
+
+.message-icon:first-child {
+  margin-right: 5px;
 }

@@ -2,6 +2,8 @@
   height: 100%;
   position: relative;
   top: 100px;
+  display: flex;
+  flex-direction: column;
 }
 
 .App-logo {

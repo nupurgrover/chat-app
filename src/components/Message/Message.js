@@ -37,12 +37,14 @@ class Message extends React.Component {
 
   render() {
     return (
-      <div className="message">
+      <div className="message-container">
         {!this.state.isEditMode ? (
-          <div>
-            {this.state.text}&nbsp;
-            <button onClick={this.handleDelete}>Delete</button>
-            <button onClick={() => this.switchToEditMode(true)}>Edit</button>
+          <div className="message">
+            <p className="message-content"> {this.state.text}&nbsp;</p>
+            <div className="message-actions">
+              <i className="fa fa-trash message-icon" onClick={this.handleDelete} />
+              <i className="fa fa-pencil message-icon" onClick={() => this.switchToEditMode(true)} />
+            </div>
           </div>
         ) : (
           <div>
