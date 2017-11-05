@@ -27,9 +27,16 @@ class TextInput extends React.Component<Props> {
 
   render() {
     return (
-      <div>
-        <input type="text" placeholder="Enter your message" onChange={this.changeMessage} value={this.state.message} />
-        <button onClick={() => this.handlePost(this.props.viewer.id)}>Post</button>
+      <div className="row">
+        <div className="col-sm">
+          <input
+            type="text"
+            placeholder="Enter your message"
+            onChange={this.changeMessage}
+            value={this.state.message}
+          />
+          <button onClick={() => this.handlePost(this.props.viewer.id)}>Post</button>
+        </div>
       </div>
     );
   }

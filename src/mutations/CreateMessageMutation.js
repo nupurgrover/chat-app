@@ -31,7 +31,6 @@ export default (message, viewerId, callback) => {
       const newMessage = proxyStore.create(id, 'Message');
       newMessage.setValue(id, 'id');
       newMessage.setValue(message, 'message');
-      console.log('optimisticUpdater', newMessage);
 
       const newEdge = proxyStore.create('client:newEdge:' + tempId++, 'MessageEdge');
       newEdge.setLinkedRecord(newMessage, 'node');
