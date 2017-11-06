@@ -28,7 +28,6 @@ export default (message, viewerId, callback) => {
     mutation,
     variables,
     optimisticUpdater: proxyStore => {
-      const createdAt = new Date().toISOString();
       const id = 'client:newMessage' + tempId++;
       const newMessage = proxyStore.create(id, 'Message');
       newMessage.setValue(id, 'id');
