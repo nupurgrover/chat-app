@@ -22,16 +22,22 @@ class TextInput extends React.Component<Props> {
     });
   };
 
-  handlePost = viewerId => {
-    CreateMessageMutation(this.state.message, viewerId, this.clearInput);
+  handlePost = evt => {
+    evt.preventDefault();
+    CreateMessageMutation(this.state.message, this.props.viewer.id, this.clearInput);
   };
 
   render() {
     return (
-      <div className="text-input-container">
-        <input type="text" placeholder="Enter your message" onChange={this.changeMessage} value={this.state.message} />
-        <button onClick={() => this.handlePost(this.props.viewer.id)}>Post</button>
-      </div>
+      <form className="text-input-container" onSubmit={this.handlePost}>
+        <input
+          autoFocus
+          type="text"
+          placeholder="Enter your message"
+          onChange={this.changeMessage}
+          value={this.state.message}
+        />
+      </form>
     );
   }
 }

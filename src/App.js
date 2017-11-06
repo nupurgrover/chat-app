@@ -24,32 +24,36 @@ const AppTextInputQuery = graphql`
 class App extends Component {
   render() {
     return (
-      <div className="App-container">
-        <div className="app-header" />
-        <QueryRenderer
-          environment={environment}
-          query={AppAllMessageQuery}
-          render={({ error, props }) => {
-            if (error) {
-              return <div>{error.message}</div>;
-            } else if (props) {
-              return <ListMessage viewer={props.viewer} />;
-            }
-            return <div>Loading</div>;
-          }}
-        />
-        <QueryRenderer
-          environment={environment}
-          query={AppTextInputQuery}
-          render={({ error, props }) => {
-            if (error) {
-              return <div>{error.message}</div>;
-            } else if (props) {
-              return <TextInput viewer={props.viewer} />;
-            }
-            return <div>Fetching Viewer</div>;
-          }}
-        />
+      <div>
+        <div className="App-header">
+          <h3>Add Some Notes</h3>
+        </div>
+        <div className="App-container">
+          <QueryRenderer
+            environment={environment}
+            query={AppAllMessageQuery}
+            render={({ error, props }) => {
+              if (error) {
+                return <div>{error.message}</div>;
+              } else if (props) {
+                return <ListMessage viewer={props.viewer} />;
+              }
+              return <i className="fa fa-spinner" />;
+            }}
+          />
+          <QueryRenderer
+            environment={environment}
+            query={AppTextInputQuery}
+            render={({ error, props }) => {
+              if (error) {
+                return <div>{error.message}</div>;
+              } else if (props) {
+                return <TextInput viewer={props.viewer} />;
+              }
+              return <i className="fa fa-spinner" />;
+            }}
+          />
+        </div>
       </div>
     );
   }

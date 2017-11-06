@@ -1,7 +1,5 @@
 .App-container {
   height: 100%;
-  position: relative;
-  top: 100px;
   display: flex;
   flex-direction: column;
 }
@@ -12,10 +10,12 @@
 }
 
 .App-header {
-  background-color: #222;
-  height: 150px;
+  background-color: #051648;
+  height: 30px;
   padding: 20px;
   color: white;
+  position: relative;
+  text-align: center;
 }
 
 .App-title {

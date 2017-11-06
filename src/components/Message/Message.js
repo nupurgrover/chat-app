@@ -61,7 +61,7 @@ class Message extends React.Component {
           </div>
         </div>
         <div className="timestamp">
-          <span>{moment(this.props.message.createdAt).format('DD/MM/YYYY, HH:mm')}</span>
+          <span>{moment(this.props.message.createdAt).format('DD/MM/YYYY, H:mm')}</span>
         </div>
       </div>
     );

@@ -19,7 +19,7 @@
   flex-direction: row;
   flex-basis: auto;
   flex: 1;
-  border-radius: 10px;
+  border-radius: 8px;
 }
 
 .message {
