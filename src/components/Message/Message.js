@@ -37,25 +37,31 @@ class Message extends React.Component {
 
   render() {
     return (
-      <div>
-        <div className="message-container">
-          {!this.state.isEditMode ? (
-            <div className="message">
-              <p className="message-content"> {this.state.text}&nbsp;</p>
-              <div className="message-actions">
-                <i className="fa fa-trash message-icon" onClick={this.handleDelete} />
-                <i className="fa fa-pencil message-icon" onClick={() => this.switchToEditMode(true)} />
+      <div className="row">
+        <div className="message-row">
+          <span className="avatar">
+            <i className="fa fa-user-circle fa-2x" />
+          </span>
+          <div className="arrow" />
+          <div className="message-container">
+            {!this.state.isEditMode ? (
+              <div className="message">
+                <p className="message-content"> {this.state.text}&nbsp;</p>
+                <div className="message-actions">
+                  <i className="fa fa-pencil message-icon" onClick={() => this.switchToEditMode(true)} />
+                  <i className="fa fa-times message-icon" onClick={this.handleDelete} />
+                </div>
               </div>
-            </div>
-          ) : (
-            <div>
-              <input value={this.state.text} onChange={this.changeText} />
-              <button onClick={this.handleEdit}>Post</button>
-            </div>
-          )}
+            ) : (
+              <div>
+                <input value={this.state.text} onChange={this.changeText} />
+                <button onClick={this.handleEdit}>Post</button>
+              </div>
+            )}
+          </div>
         </div>
         <div className="timestamp">
-          <span>{moment(this.props.message.createdAt).format('DD/MM/YYYY, h:mm')}</span>
+          <span>{moment(this.props.message.createdAt).format('DD/MM/YYYY, HH:mm')}</span>
         </div>
       </div>
     );
