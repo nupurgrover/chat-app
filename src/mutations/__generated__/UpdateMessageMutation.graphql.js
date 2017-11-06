@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash f4fce042b89b33579760259279c8ab74
+ * @relayHash 65e6363cd0a7dde1a47a77396714c1fd
  */
 
 /* eslint-disable */
@@ -19,8 +19,8 @@ export type UpdateMessageMutationVariables = {|
 export type UpdateMessageMutationResponse = {|
   +updateMessage: ?{|
     +message: ?{|
-      +id: string;
       +message: string;
+      +updatedAt: any;
     |};
   |};
 |};
@@ -33,8 +33,9 @@ mutation UpdateMessageMutation(
 ) {
   updateMessage(input: $input) {
     message {
-      id
       message
+      updatedAt
+      id
     }
   }
 }
@@ -81,14 +82,14 @@ const batch /*: ConcreteBatch*/ = {
                 "kind": "ScalarField",
                 "alias": null,
                 "args": null,
-                "name": "id",
+                "name": "message",
                 "storageKey": null
               },
               {
                 "kind": "ScalarField",
                 "alias": null,
                 "args": null,
-                "name": "message",
+                "name": "updatedAt",
                 "storageKey": null
               }
             ],
@@ -144,14 +145,21 @@ const batch /*: ConcreteBatch*/ = {
                 "kind": "ScalarField",
                 "alias": null,
                 "args": null,
-                "name": "id",
+                "name": "message",
                 "storageKey": null
               },
               {
                 "kind": "ScalarField",
                 "alias": null,
                 "args": null,
-                "name": "message",
+                "name": "updatedAt",
+                "storageKey": null
+              },
+              {
+                "kind": "ScalarField",
+                "alias": null,
+                "args": null,
+                "name": "id",
                 "storageKey": null
               }
             ],
@@ -162,7 +170,7 @@ const batch /*: ConcreteBatch*/ = {
       }
     ]
   },
-  "text": "mutation UpdateMessageMutation(\n  $input: UpdateMessageInput!\n) {\n  updateMessage(input: $input) {\n    message {\n      id\n      message\n    }\n  }\n}\n"
+  "text": "mutation UpdateMessageMutation(\n  $input: UpdateMessageInput!\n) {\n  updateMessage(input: $input) {\n    message {\n      message\n      updatedAt\n      id\n    }\n  }\n}\n"
 };
 
 module.exports = batch;

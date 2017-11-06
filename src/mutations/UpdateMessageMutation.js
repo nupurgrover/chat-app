@@ -7,6 +7,7 @@ const mutation = graphql`
       message {
         id
         message
+        updatedAt
       }
     }
   }

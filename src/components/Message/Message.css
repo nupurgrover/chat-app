@@ -68,3 +68,14 @@
   border-width: 10px;
   margin-top: -10px;
 }
+
+.message-text-input {
+  outline: none;
+  border: none;
+  height: 100%;
+  font-size: 14px;
+  width: 90%;
+  border-radius: 5px;
+  padding-left: 10px;
+  padding-right: 10px;
+}

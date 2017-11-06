@@ -18,7 +18,7 @@ class Message extends React.Component {
     DeleteMessageMutation(this.props.message.id, this.props.viewer.id);
   };
 
-  switchToEditMode = isEditMode => {
+  setEditMode = isEditMode => {
     this.setState({
       isEditMode,
     });
@@ -30,12 +30,17 @@ class Message extends React.Component {
     });
   };
 
-  handleEdit = () => {
-    UpdateMessageMutation(this.props.message.id, this.state.text, this.props.viewer.id);
-    this.switchToEditMode(false);
+  handleEdit = evt => {
+    if ([13, 14].includes(evt.keyCode)) {
+      evt.preventDefault();
+      UpdateMessageMutation(this.props.message.id, this.state.text, this.props.viewer.id);
+      this.setEditMode(false);
+    }
   };
 
   render() {
+    console.log('rendering', this.props.message);
+    const timestamp = this.props.message.updatedAt ? this.props.message.updatedAt : this.props.message.createdAt;
     return (
       <div className="row">
         <div className="message-row">
@@ -48,20 +53,22 @@ class Message extends React.Component {
               <div className="message">
                 <p className="message-content"> {this.state.text}&nbsp;</p>
                 <div className="message-actions">
-                  <i className="fa fa-pencil message-icon" onClick={() => this.switchToEditMode(true)} />
+                  <i className="fa fa-pencil message-icon" onClick={() => this.setEditMode(true)} />
                   <i className="fa fa-times message-icon" onClick={this.handleDelete} />
                 </div>
               </div>
             ) : (
-              <div>
-                <input value={this.state.text} onChange={this.changeText} />
-                <button onClick={this.handleEdit}>Post</button>
-              </div>
+              <input
+                className="message-text-input"
+                value={this.state.text}
+                onChange={this.changeText}
+                onKeyDown={this.handleEdit}
+              />
             )}
           </div>
         </div>
         <div className="timestamp">
-          <span>{moment(this.props.message.createdAt).format('DD/MM/YYYY, H:mm')}</span>
+          <span>{moment(timestamp).format('DD/MM/YYYY, H:mm')}</span>
         </div>
       </div>
     );
@@ -79,6 +86,7 @@ export default createFragmentContainer(
       id
       message
       createdAt
+      updatedAt
     }
   `
 );

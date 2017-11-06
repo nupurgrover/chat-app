@@ -12,6 +12,7 @@ export type Message_message = {|
   +id: string;
   +message: string;
   +createdAt: any;
+  +updatedAt: any;
 |};
 */
 
@@ -41,6 +42,13 @@ const fragment /*: ConcreteFragment*/ = {
       "alias": null,
       "args": null,
       "name": "createdAt",
+      "storageKey": null
+    },
+    {
+      "kind": "ScalarField",
+      "alias": null,
+      "args": null,
+      "name": "updatedAt",
       "storageKey": null
     }
   ],
